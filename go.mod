@@ -1,4 +1,4 @@
-module railway-supervisor
+module github.com/ebravofm/railway-supervisor
 
 go 1.21
 
