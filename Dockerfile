@@ -3,13 +3,15 @@ FROM golang:1.21-alpine AS builder
 
 WORKDIR /app
 
-# Copy dependency files (if any)
-COPY go.mod ./
-# Copy source code
-COPY main.go ./
+# Copy dependency files
+COPY go.mod go.sum ./
+RUN go mod download
 
-# Build an optimized, static binary
-RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w" -o supervisor main.go
+# Copy source code
+COPY . .
+
+# Build from the new cmd path
+RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w" -o supervisor ./cmd/supervisor/main.go
 
 # Stage 2: Minimal runner
 FROM alpine:latest
