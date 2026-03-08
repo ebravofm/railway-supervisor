@@ -22,7 +22,7 @@ func NewClient(token string) *Client {
 }
 
 func (c *Client) FetchServicesForEnvironment(envID string) ([]string, error) {
-	query := `query($id: String!) { environment(id: $id) { serviceInstances { nodes { serviceId } } } }`
+	query := `query($id: String!) { environment(id: $id) { serviceInstances { edges { node { serviceId } } } } }`
 	vars := map[string]interface{}{"id": envID}
 
 	respData, err := c.executeGraphQL(query, vars)
@@ -34,9 +34,11 @@ func (c *Client) FetchServicesForEnvironment(envID string) ([]string, error) {
 		Data struct {
 			Environment struct {
 				ServiceInstances struct {
-					Nodes []struct {
-						ServiceID string `json:"serviceId"`
-					} `json:"nodes"`
+					Edges []struct {
+						Node struct {
+							ServiceID string `json:"serviceId"`
+						} `json:"node"`
+					} `json:"edges"`
 				} `json:"serviceInstances"`
 			} `json:"environment"`
 		} `json:"data"`
@@ -47,8 +49,8 @@ func (c *Client) FetchServicesForEnvironment(envID string) ([]string, error) {
 	}
 
 	var sIDs []string
-	for _, instance := range result.Data.Environment.ServiceInstances.Nodes {
-		sIDs = append(sIDs, instance.ServiceID)
+	for _, edge := range result.Data.Environment.ServiceInstances.Edges {
+		sIDs = append(sIDs, edge.Node.ServiceID)
 	}
 
 	return sIDs, nil
