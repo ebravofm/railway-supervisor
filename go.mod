@@ -1,4 +1,4 @@
-module github.com/user/railway-supervisor
+module railway-supervisor
 
 go 1.21
 

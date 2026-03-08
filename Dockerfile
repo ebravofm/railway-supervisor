@@ -3,15 +3,17 @@ FROM golang:1.21-alpine AS builder
 
 WORKDIR /app
 
-# Copy dependency files
+# Copy go.mod and go.sum first
 COPY go.mod go.sum ./
+
+# Download dependencies
 RUN go mod download
 
-# Copy source code
+# Copy all source code
 COPY . .
 
-# Build the binary from the root main.go
-RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w" -o /app/supervisor main.go
+# Build the binary (go build will resolve internal packages automatically)
+RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w" -o /app/supervisor .
 
 # Stage 2: Minimal runner
 FROM alpine:latest

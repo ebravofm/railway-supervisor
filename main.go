@@ -7,8 +7,8 @@ import (
 	"time"
 
 	"github.com/joho/godotenv"
-	"github.com/user/railway-supervisor/pkg/railway"
-	"github.com/user/railway-supervisor/pkg/supervisor"
+	"railway-supervisor/pkg/railway"
+	"railway-supervisor/pkg/supervisor"
 )
 
 func main() {
