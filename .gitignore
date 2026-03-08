@@ -1,0 +1,22 @@
+# Binaries
+supervisor
+
+# Local configuration and secrets
+.env
+config.json
+
+# Go dependencies and temporary files
+vendor/
+*.log
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# IDEs
+.idea/
+.vscode/
+.DS_Store

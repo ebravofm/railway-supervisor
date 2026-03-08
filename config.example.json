@@ -1,0 +1,24 @@
+{
+  "checkIntervalMinutes": 5,
+  "timezone": "America/Santiago",
+  "rules": [
+    {
+      "name": "Apagar todo el entorno de Pruebas",
+      "environmentId": "xxxx-xxxx-xxxx-xxxx",
+      "serviceId": null,
+      "sleepWindow": {
+        "start": "02:00",
+        "end": "08:00"
+      }
+    },
+    {
+      "name": "Apagar Servicio de Analitica",
+      "environmentId": "yyyy-yyyy-yyyy-yyyy",
+      "serviceId": "zzzz-zzzz-zzzz-zzzz",
+      "sleepWindow": {
+        "start": "22:00",
+        "end": "06:00"
+      }
+    }
+  ]
+}
