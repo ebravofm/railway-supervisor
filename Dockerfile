@@ -10,8 +10,8 @@ RUN go mod download
 # Copy source code
 COPY . .
 
-# Build from the new cmd path
-RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w" -o supervisor ./cmd/supervisor/main.go
+# Build the binary from the root main.go
+RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w" -o /app/supervisor main.go
 
 # Stage 2: Minimal runner
 FROM alpine:latest

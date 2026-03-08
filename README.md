@@ -3,11 +3,12 @@
 Servicio ultraliviano en Go para automatizar el modo **Serverless** (`sleepApplication`) en servicios de Railway.
 
 ## Estructura del Proyecto
-El proyecto sigue el estándar de organización de Go para mayor escalabilidad:
-- `cmd/supervisor/`: Punto de entrada de la aplicación.
+El proyecto está organizado para ser modular y fácil de desplegar:
+- `main.go`: Punto de entrada de la aplicación en la raíz.
 - `pkg/railway/`: Cliente para la API de GraphQL de Railway.
 - `pkg/supervisor/`: Lógica central de monitoreo y reglas de horarios.
 - `Dockerfile`: Construcción multi-etapa para una imagen final mínima (~15MB).
+- `.env`: Configuración local de secretos.
 
 ## Configuración
 
@@ -53,7 +54,7 @@ CONFIG_JSON={"checkIntervalMinutes":5,"timezone":"America/Santiago","rules":[{"n
 
 ### Compilar Localmente
 ```bash
-go build -o supervisor ./cmd/supervisor/main.go
+go build -o supervisor main.go
 ```
 
 ### Ejecutar Localmente
