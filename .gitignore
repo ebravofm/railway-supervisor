@@ -1,5 +1,5 @@
 # Binaries
-supervisor
+/supervisor
 
 # Local configuration and secrets
 .env
